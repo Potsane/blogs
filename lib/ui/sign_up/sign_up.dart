@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../theme/app_pallete.dart';
 import '../widgets/outlined_text_input.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -25,22 +24,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                "Let's sign you in",
-                style: TextStyle(
-                  fontSize: 32,
-                  fontWeight: FontWeight.bold,
-                  color: AppPallete.mandy,
-                ),
+              Text(
+                "Hello there,",
+                style: Theme.of(context).textTheme.headlineLarge,
               ),
               const SizedBox(height: 16),
-              const Text(
-                "Welcome back \nYou've been missed!",
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.normal,
-                  color: AppPallete.sweetPink,
-                ),
+              Text(
+                "You are welcome \nLet's get you signed you up!",
+                style:  Theme.of(context).textTheme.headlineMedium,
               ),
               const SizedBox(height: 48),
               OutlinedTextInput(

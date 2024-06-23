@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../theme/app_pallete.dart';
-
 class OutlinedTextInput extends StatelessWidget {
   final String hint;
   final TextEditingController controller;
@@ -19,27 +17,10 @@ class OutlinedTextInput extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          hint,
-          style: const TextStyle(
-            fontSize: 12,
-            fontWeight: FontWeight.bold,
-            color: AppPallete.mandy,
-          ),
-        ),
+        Text(hint, style: Theme.of(context).textTheme.labelMedium),
         TextFormField(
           obscureText: isTextMusked,
-          decoration: InputDecoration(
-            focusedBorder: const OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(8)),
-              borderSide: BorderSide(color: AppPallete.citron),
-            ),
-            border: const OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(8)),
-              borderSide: BorderSide(color: AppPallete.citron),
-            ),
-            hintText: "Enter $hint",
-          ),
+          decoration: InputDecoration(hintText: "Enter $hint"),
           validator: (value) {
             if (value!.isEmpty) {
               return "Value is missing!";
