@@ -1,0 +1,4 @@
+class AppKeys{
+  static const supabaseUrl ="https://bsacyzdrfxmrisdprwzh.supabase.co";
+  static const supabaseAnonKey ="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJzYWN5emRyZnhtcmlzZHByd3poIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTkzMzk3NTgsImV4cCI6MjAzNDkxNTc1OH0.6RsPBcrvoURTEYZhBfKNbxbkNgc95pBmVL-49u1_Z6M";
+}
