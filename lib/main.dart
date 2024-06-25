@@ -1,4 +1,4 @@
-import 'package:blogs/ui/sign_up/login.dart';
+import 'package:blogs/ui/login/login.dart';
 import 'package:blogs/ui/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 
