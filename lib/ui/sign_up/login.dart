@@ -1,24 +1,23 @@
-import 'package:blogs/ui/sign_up/login.dart';
-import 'package:blogs/ui/widgets/two_part_rich_text.dart';
+import 'package:blogs/ui/sign_up/sign_up.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/filled_button.dart';
 import '../widgets/outlined_text_input.dart';
+import '../widgets/two_part_rich_text.dart';
 
-class SignUpScreen extends StatefulWidget {
-  const SignUpScreen({super.key});
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
 
-  static router() => MaterialPageRoute(builder: (ctc) => const SignUpScreen());
+  static router() => MaterialPageRoute(builder: (ctc) => const LoginScreen());
 
   @override
   State<StatefulWidget> createState() {
-    return _SignUpScreenState();
+    return _LoginScreenState();
   }
 }
 
-class _SignUpScreenState extends State<SignUpScreen> {
+class _LoginScreenState extends State<LoginScreen> {
   final emailController = TextEditingController();
-  final userNameController = TextEditingController();
   final passwordController = TextEditingController();
   final formKey = GlobalKey<FormState>();
 
@@ -26,16 +25,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
   void dispose() {
     super.dispose();
     emailController.dispose();
-    userNameController.dispose();
     passwordController.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
       body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 16),
+        padding: const EdgeInsets.symmetric(vertical: 96, horizontal: 16),
         child: SingleChildScrollView(
           child: Form(
             key: formKey,
@@ -43,20 +40,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Hello there,",
+                  "Let's Sign you in.",
                   style: Theme.of(context).textTheme.headlineLarge,
                 ),
                 const SizedBox(height: 16),
                 Text(
-                  "You are welcome \nLet's get you signed you up!",
+                  "Welcome back\nYou've been missed!",
                   style: Theme.of(context).textTheme.headlineMedium,
                 ),
                 const SizedBox(height: 48),
-                OutlinedTextInput(
-                  hint: "Username",
-                  controller: userNameController,
-                ),
-                const SizedBox(height: 16),
                 OutlinedTextInput(
                   hint: "Email",
                   controller: emailController,
@@ -69,15 +61,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 const SizedBox(height: 24),
                 FilledDefaultButton(
-                  text: "Sign up",
+                  text: "Sign in",
                   onClick: () {},
                 ),
                 const SizedBox(height: 8),
                 TwoPartRichText(
-                  partOne: "Already have an account?",
-                  partTwo: "Sign in",
+                  partOne: "Don't have an account?",
+                  partTwo: "Sign up",
                   onClick: () {
-                    Navigator.pushReplacement(context, LoginScreen.router());
+                    Navigator.push(context, SignUpScreen.router());
                   },
                 )
               ],

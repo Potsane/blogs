@@ -1,4 +1,4 @@
-import 'package:blogs/ui/sign_up/sign_up.dart';
+import 'package:blogs/ui/sign_up/login.dart';
 import 'package:blogs/ui/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Blog App',
       theme: AppTheme.appLightTheme,
-      home: const SignUpScreen(),
+      home: const LoginScreen(),
     );
   }
 }
