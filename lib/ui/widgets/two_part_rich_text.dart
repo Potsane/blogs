@@ -19,24 +19,26 @@ class TwoPartRichText extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        RichText(
-          text: TextSpan(
-            text: partOne,
-            style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                  fontWeight: FontWeight.normal,
-                  color: AppPallete.lightBlue700,
-                ),
-            children: <TextSpan>[
-              TextSpan(
-                text: " $partTwo",
+        GestureDetector(
+            onTap: onClick,
+            child: RichText(
+              text: TextSpan(
+                text: partOne,
                 style: Theme.of(context).textTheme.labelLarge!.copyWith(
                       fontWeight: FontWeight.normal,
-                      color: AppPallete.lightBlue300,
+                      color: AppPallete.lightBlue700,
                     ),
-              )
-            ],
-          ),
-        )
+                children: <TextSpan>[
+                  TextSpan(
+                    text: " $partTwo",
+                    style: Theme.of(context).textTheme.labelLarge!.copyWith(
+                          fontWeight: FontWeight.normal,
+                          color: AppPallete.lightBlue300,
+                        ),
+                  )
+                ],
+              ),
+            ))
       ],
     );
   }

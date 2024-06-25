@@ -5,6 +5,7 @@ import 'app_pallete.dart';
 class AppTheme {
   static final appLightTheme = ThemeData().copyWith(
       scaffoldBackgroundColor: Colors.white,
+      appBarTheme: const AppBarTheme(backgroundColor: Colors.white),
       textTheme: ThemeData().textTheme.copyWith(
             headlineLarge: const TextStyle(
               fontSize: 32,
@@ -22,10 +23,7 @@ class AppTheme {
               color: AppPallete.lightBlue700,
             ),
             labelLarge: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-              color: Colors.white
-            ),
+                fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
           ),
       inputDecorationTheme: const InputDecorationTheme(
         focusedBorder: OutlineInputBorder(
