@@ -5,7 +5,7 @@ import '../theme/app_pallete.dart';
 class TwoPartRichText extends StatelessWidget {
   final String partOne;
   final String partTwo;
-  final void Function() onClick;
+  final VoidCallback onClick;
 
   const TwoPartRichText({
     super.key,
