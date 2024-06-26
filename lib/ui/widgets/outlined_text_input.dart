@@ -19,6 +19,7 @@ class OutlinedTextInput extends StatelessWidget {
       children: [
         Text(hint, style: Theme.of(context).textTheme.labelMedium),
         TextFormField(
+          controller: controller,
           obscureText: isTextMusked,
           decoration: InputDecoration(hintText: "Enter $hint"),
           validator: (value) {

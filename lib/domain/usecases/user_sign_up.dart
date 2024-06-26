@@ -11,7 +11,7 @@ class UserSignUp implements Usecase<String, UserSignUpArgs> {
   const UserSignUp({required this.repository});
 
   @override
-  Future<Either<Failure, String>> invoke(UserSignUpArgs args) async {
+  Future<Either<Failure, String>> call(UserSignUpArgs args) async {
     return await repository.signUp(
       username: args.username,
       email: args.email,

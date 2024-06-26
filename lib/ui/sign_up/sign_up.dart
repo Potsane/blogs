@@ -1,7 +1,8 @@
+import 'package:blogs/ui/bloc/auth_bloc.dart';
 import 'package:blogs/ui/login/login.dart';
 import 'package:blogs/ui/widgets/two_part_rich_text.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../widgets/filled_button.dart';
 import '../widgets/outlined_text_input.dart';
 
@@ -70,7 +71,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 const SizedBox(height: 24),
                 FilledDefaultButton(
                   text: "Sign up",
-                  onClick: () {},
+                  onClick: () {
+                    if (formKey.currentState!.validate()) {
+                      context.read<AuthBloc>().add(
+                            AuthSingUp(
+                              email: emailController.text.trim(),
+                              username: userNameController.text.trim(),
+                              password: passwordController.text.trim(),
+                            ),
+                          );
+                    }
+                  },
                 ),
                 const SizedBox(height: 8),
                 TwoPartRichText(
