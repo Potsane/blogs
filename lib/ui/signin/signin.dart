@@ -1,5 +1,5 @@
 import 'package:blogs/ui/bloc/auth_bloc.dart';
-import 'package:blogs/ui/signin/signin.dart';
+import 'package:blogs/ui/sign_up/sign_up.dart';
 import 'package:blogs/ui/widgets/filled_button.dart';
 import 'package:blogs/ui/widgets/loader.dart';
 import 'package:blogs/ui/widgets/outlined_text_input.dart';
@@ -8,20 +8,19 @@ import 'package:blogs/ui/widgets/two_part_rich_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class SignUpScreen extends StatefulWidget {
-  const SignUpScreen({super.key});
+class SignInScreen extends StatefulWidget {
+  const SignInScreen({super.key});
 
-  static router() => MaterialPageRoute(builder: (ctc) => const SignUpScreen());
+  static router() => MaterialPageRoute(builder: (ctc) => const SignInScreen());
 
   @override
   State<StatefulWidget> createState() {
-    return _SignUpScreenState();
+    return _SignInScreenState();
   }
 }
 
-class _SignUpScreenState extends State<SignUpScreen> {
+class _SignInScreenState extends State<SignInScreen> {
   final emailController = TextEditingController();
-  final userNameController = TextEditingController();
   final passwordController = TextEditingController();
   final formKey = GlobalKey<FormState>();
 
@@ -29,47 +28,40 @@ class _SignUpScreenState extends State<SignUpScreen> {
   void dispose() {
     super.dispose();
     emailController.dispose();
-    userNameController.dispose();
     passwordController.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
       body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 16),
-        child: BlocConsumer<AuthBloc, AuthState>(
-          listener: (context, state) {
-            if (state is AuthFailure) {
-              showSnackBar(context, state.errorMessage);
-            }
-          },
-          builder: (context, state) {
-            if (state is AuthLoading) {
-              return const Loader();
-            }
-            return SingleChildScrollView(
-              child: Form(
+        padding: const EdgeInsets.symmetric(vertical: 96, horizontal: 16),
+        child: SingleChildScrollView(
+          child: BlocConsumer<AuthBloc, AuthState>(
+            listener: (context, state) {
+              if (state is AuthFailure) {
+                showSnackBar(context, state.errorMessage);
+              }
+            },
+            builder: (context, state) {
+              if (state is AuthLoading) {
+                return const Loader();
+              }
+              return Form(
                 key: formKey,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Hello there,",
+                      "Let's Sign you in.",
                       style: Theme.of(context).textTheme.headlineLarge,
                     ),
                     const SizedBox(height: 16),
                     Text(
-                      "You are welcome \nLet's get you signed you up!",
+                      "Welcome back\nYou've been missed!",
                       style: Theme.of(context).textTheme.headlineMedium,
                     ),
                     const SizedBox(height: 48),
-                    OutlinedTextInput(
-                      hint: "Username",
-                      controller: userNameController,
-                    ),
-                    const SizedBox(height: 16),
                     OutlinedTextInput(
                       hint: "Email",
                       controller: emailController,
@@ -82,13 +74,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                     const SizedBox(height: 24),
                     FilledDefaultButton(
-                      text: "Sign up",
+                      text: "Sign in",
                       onClick: () {
                         if (formKey.currentState!.validate()) {
                           context.read<AuthBloc>().add(
-                                AuthSingUp(
+                                AuthSignIn(
                                   email: emailController.text.trim(),
-                                  username: userNameController.text.trim(),
                                   password: passwordController.text.trim(),
                                 ),
                               );
@@ -97,18 +88,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                     const SizedBox(height: 8),
                     TwoPartRichText(
-                      partOne: "Already have an account?",
-                      partTwo: "Sign in",
+                      partOne: "Don't have an account?",
+                      partTwo: "Sign up",
                       onClick: () {
-                        Navigator.pushReplacement(
-                            context, SignInScreen.router());
+                        Navigator.push(context, SignUpScreen.router());
                       },
                     )
                   ],
                 ),
-              ),
-            );
-          },
+              );
+            },
+          ),
         ),
       ),
     );

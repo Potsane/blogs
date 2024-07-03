@@ -1,9 +1,10 @@
 import 'package:blogs/injection/init_dependancies.dart';
 import 'package:blogs/ui/bloc/auth_bloc.dart';
-import 'package:blogs/ui/login/login.dart';
 import 'package:blogs/ui/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'ui/signin/signin.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Blog App',
       theme: AppTheme.appLightTheme,
-      home: const LoginScreen(),
+      home: const SignInScreen(),
     );
   }
 }
