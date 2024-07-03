@@ -1,7 +1,6 @@
 import 'package:blogs/common/error/failures.dart';
+import 'package:blogs/domain/entity/profile.dart';
 import 'package:fpdart/fpdart.dart';
-
-import '../../entity/profile.dart';
 
 abstract interface class AuthRepository {
   Future<Either<Failure, Profile>> signUp({
