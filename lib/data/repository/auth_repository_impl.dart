@@ -3,7 +3,7 @@ import 'package:blogs/common/error/failures.dart';
 import 'package:blogs/data/datasource/remote/auth_remote_data_source.dart';
 import 'package:blogs/domain/entity/profile.dart';
 import 'package:blogs/domain/repository/auth/auth_repository.dart';
-import 'package:fpdart/src/either.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
@@ -37,6 +37,25 @@ class AuthRepositoryImpl implements AuthRepository {
         password: password,
       ),
     );
+  }
+
+  @override
+  Future<Either<Failure, Profile>> currentProfile() async {
+    try {
+      final profile = await remoteDataSource.getCurrentProfile();
+      if (profile == null) {
+        return left(Failure(errorMessage: "User not logged in!"));
+      }
+      return right(
+        Profile(
+          id: profile.id,
+          email: profile.email,
+          name: profile.name,
+        ),
+      );
+    } on GeneralNetworkException catch (e) {
+      return left(Failure(errorMessage: e.errorMessage));
+    }
   }
 
   Future<Either<Failure, Profile>> _getProfile(

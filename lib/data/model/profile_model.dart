@@ -14,4 +14,16 @@ class ProfileModel extends Profile {
       name: map['name'] ?? '',
     );
   }
+
+  ProfileModel copyWith({
+    String? id,
+    String? email,
+    String? name,
+  }) {
+    return ProfileModel(
+      id: id ?? this.id,
+      email: email ?? this.email,
+      name: name ?? this.name,
+    );
+  }
 }

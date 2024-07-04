@@ -3,6 +3,8 @@ import 'package:blogs/data/model/profile_model.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 abstract interface class AuthRemoteDataSource {
+  Session? get currentUserSession;
+
   Future<ProfileModel> signUp({
     required String username,
     required String email,
@@ -13,12 +15,17 @@ abstract interface class AuthRemoteDataSource {
     required String email,
     required String password,
   });
+
+  Future<ProfileModel?> getCurrentProfile();
 }
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   final SupabaseClient supabaseClient;
 
   AuthRemoteDataSourceImpl({required this.supabaseClient});
+
+  @override
+  Session? get currentUserSession => supabaseClient.auth.currentSession;
 
   @override
   Future<ProfileModel> signIn({
@@ -54,6 +61,21 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         throw const GeneralNetworkException();
       }
       return ProfileModel.fromJson(response.user!.toJson());
+    } catch (e) {
+      throw GeneralNetworkException(errorMessage: e.toString());
+    }
+  }
+
+  @override
+  Future<ProfileModel?> getCurrentProfile() async {
+    try {
+      if (currentUserSession == null) return null;
+      final userProfile = await supabaseClient
+          .from('profiles')
+          .select()
+          .eq('id', currentUserSession!.user.id);
+      return ProfileModel.fromJson(userProfile.first)
+          .copyWith(email: currentUserSession!.user.email);
     } catch (e) {
       throw GeneralNetworkException(errorMessage: e.toString());
     }
