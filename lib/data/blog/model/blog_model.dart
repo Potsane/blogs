@@ -40,7 +40,7 @@ class BlogModel extends Blog {
 
   BlogModel copyWith({
     String? id,
-    String? posterId,
+    String? userId,
     String? title,
     String? content,
     String? imageUrl,
@@ -50,7 +50,7 @@ class BlogModel extends Blog {
   }) {
     return BlogModel(
       id: id ?? this.id,
-      userId: posterId ?? this.userId,
+      userId: userId ?? this.userId,
       title: title ?? this.title,
       content: content ?? this.content,
       imageUrl: imageUrl ?? this.imageUrl,
