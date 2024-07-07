@@ -9,6 +9,7 @@ import 'package:blogs/domain/auth/usecase/current_profile.dart';
 import 'package:blogs/domain/auth/usecase/user_sign_in.dart';
 import 'package:blogs/domain/auth/usecase/user_sign_up.dart';
 import 'package:blogs/domain/blog/repository/blog_repository.dart';
+import 'package:blogs/domain/blog/usecase/get_all_blogs.dart';
 import 'package:blogs/domain/blog/usecase/upload_blog.dart';
 import 'package:blogs/ui/auth/bloc/auth_bloc.dart';
 import 'package:blogs/ui/blog/bloc/blog_bloc.dart';
@@ -81,7 +82,8 @@ void _initBlogDependencies() {
     ..registerFactory(
       () => UploadBlog(repository: serviceLocator()),
     )
+    ..registerFactory(() => GetAllBlogs(repository: serviceLocator()))
     ..registerLazySingleton(
-      () => BlogBloc(serviceLocator()),
+      () => BlogBloc(serviceLocator(), serviceLocator()),
     );
 }

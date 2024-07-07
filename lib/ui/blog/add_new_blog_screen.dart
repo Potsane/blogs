@@ -63,7 +63,7 @@ class _AddNewBlogScreenState extends State<AddNewBlogScreen> {
         listener: (context, state) {
           if (state is BlogFailure) {
             showSnackBar(context, state.errorMessage);
-          } else if (state is BlogSuccess) {
+          } else if (state is BlogUploadSuccess) {
             //Navigator.pushAndRemoveUntil(context, BlogScreen.router());
             Navigator.pushReplacement(context, BlogScreen.router());
           }
@@ -204,7 +204,7 @@ class _AddNewBlogScreenState extends State<AddNewBlogScreen> {
               .id;
 
       context.read<BlogBloc>().add(
-            Upload(
+            EventUploadBlog(
               image: image!,
               title: titleController.text.trim(),
               content: contentController.text.trim(),
