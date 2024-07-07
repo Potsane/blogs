@@ -1,4 +1,4 @@
-import 'package:blogs/domain/entity/profile.dart';
+import 'package:blogs/domain/auth/entity/profile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

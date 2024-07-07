@@ -1,5 +1,5 @@
 import 'package:blogs/common/error/exceptions.dart';
-import 'package:blogs/data/model/profile_model.dart';
+import 'package:blogs/data/auth/model/profile_model.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 abstract interface class AuthRemoteDataSource {

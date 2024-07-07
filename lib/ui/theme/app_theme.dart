@@ -6,6 +6,9 @@ class AppTheme {
   static final appLightTheme = ThemeData().copyWith(
       scaffoldBackgroundColor: Colors.white,
       appBarTheme: const AppBarTheme(backgroundColor: Colors.white),
+      chipTheme: const ChipThemeData(
+        color: MaterialStatePropertyAll(Colors.white),
+      ),
       textTheme: ThemeData().textTheme.copyWith(
             headlineLarge: const TextStyle(
               fontSize: 32,
