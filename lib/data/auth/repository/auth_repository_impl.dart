@@ -1,8 +1,8 @@
 import 'package:blogs/common/error/exceptions.dart';
 import 'package:blogs/common/error/failures.dart';
-import 'package:blogs/data/datasource/remote/auth_remote_data_source.dart';
-import 'package:blogs/domain/entity/profile.dart';
-import 'package:blogs/domain/repository/auth/auth_repository.dart';
+import 'package:blogs/data/auth/datasource/remote/auth_remote_data_source.dart';
+import 'package:blogs/domain/auth/entity/profile.dart';
+import 'package:blogs/domain/auth/repository/auth_repository.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 

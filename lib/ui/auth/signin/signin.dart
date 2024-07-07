@@ -1,5 +1,5 @@
-import 'package:blogs/ui/bloc/auth_bloc.dart';
-import 'package:blogs/ui/sign_up/sign_up.dart';
+import 'package:blogs/ui/auth/bloc/auth_bloc.dart';
+import 'package:blogs/ui/auth/sign_up/sign_up.dart';
 import 'package:blogs/ui/widgets/filled_button.dart';
 import 'package:blogs/ui/widgets/loader.dart';
 import 'package:blogs/ui/widgets/outlined_text_input.dart';

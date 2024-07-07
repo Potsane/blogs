@@ -1,11 +1,11 @@
 import 'package:blogs/common/cubits/auth_session_cubit.dart';
-import 'package:blogs/domain/entity/empty_args.dart';
-import 'package:blogs/domain/entity/profile.dart';
-import 'package:blogs/domain/entity/user_sign_in_args.dart';
-import 'package:blogs/domain/entity/user_sign_up_args.dart';
-import 'package:blogs/domain/usecases/current_profile.dart';
-import 'package:blogs/domain/usecases/user_sign_in.dart';
-import 'package:blogs/domain/usecases/user_sign_up.dart';
+import 'package:blogs/domain/auth/entity/empty_args.dart';
+import 'package:blogs/domain/auth/entity/profile.dart';
+import 'package:blogs/domain/auth/entity/user_sign_in_args.dart';
+import 'package:blogs/domain/auth/entity/user_sign_up_args.dart';
+import 'package:blogs/domain/auth/usecase/current_profile.dart';
+import 'package:blogs/domain/auth/usecase/user_sign_in.dart';
+import 'package:blogs/domain/auth/usecase/user_sign_up.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

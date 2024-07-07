@@ -1,4 +1,4 @@
-import 'package:blogs/domain/entity/profile.dart';
+import 'package:blogs/domain/auth/entity/profile.dart';
 
 class ProfileModel extends Profile {
   ProfileModel({

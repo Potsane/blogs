@@ -1,11 +1,13 @@
 import 'package:blogs/common/cubits/auth_session_cubit.dart';
 import 'package:blogs/injection/init_dependancies.dart';
-import 'package:blogs/ui/bloc/auth_bloc.dart';
+import 'package:blogs/ui/auth/bloc/auth_bloc.dart';
+import 'package:blogs/ui/blog/bloc/blog_bloc.dart';
+import 'package:blogs/ui/blog/blog_screen.dart';
 import 'package:blogs/ui/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'ui/signin/signin.dart';
+import 'ui/auth/signin/signin.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,6 +17,7 @@ void main() async {
       providers: [
         BlocProvider(create: (_) => serviceLocator<AuthSessionCubit>()),
         BlocProvider(create: (_) => serviceLocator<AuthBloc>()),
+        BlocProvider(create: (_) => serviceLocator<BlogBloc>()),
       ],
       child: const MyApp(),
     ),
@@ -47,9 +50,7 @@ class _MyAppState extends State<MyApp> {
         },
         builder: (context, isLoggedIn) {
           if (isLoggedIn) {
-            return const Scaffold(
-              body: Center(child: Text("User Logged In!")),
-            );
+            return const BlogScreen();
           }
           return const SignInScreen();
         },
