@@ -1,5 +1,6 @@
 import 'package:blogs/ui/auth/bloc/auth_bloc.dart';
 import 'package:blogs/ui/auth/signin/signin.dart';
+import 'package:blogs/ui/blog/blog_screen.dart';
 import 'package:blogs/ui/widgets/filled_button.dart';
 import 'package:blogs/ui/widgets/loader.dart';
 import 'package:blogs/ui/widgets/outlined_text_input.dart';
@@ -43,6 +44,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
           listener: (context, state) {
             if (state is AuthFailure) {
               showSnackBar(context, state.errorMessage);
+            }else if(state is AuthSuccess){
+              Navigator.pushReplacement(context, BlogScreen.router());
             }
           },
           builder: (context, state) {

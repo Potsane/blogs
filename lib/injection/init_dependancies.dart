@@ -1,5 +1,7 @@
 import 'package:blogs/common/cubits/auth_session_cubit.dart';
 import 'package:blogs/common/keys/app_keys.dart';
+import 'package:blogs/common/network/connection_checker.dart';
+import 'package:blogs/data/auth/datasource/local/blog_local_data_source.dart';
 import 'package:blogs/data/auth/datasource/remote/auth_remote_data_source.dart';
 import 'package:blogs/data/auth/repository/auth_repository_impl.dart';
 import 'package:blogs/data/blog/datasource/remote/blog_remote_data_source.dart';
@@ -14,22 +16,35 @@ import 'package:blogs/domain/blog/usecase/upload_blog.dart';
 import 'package:blogs/ui/auth/bloc/auth_bloc.dart';
 import 'package:blogs/ui/blog/bloc/blog_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:hive/hive.dart';
+import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 final serviceLocator = GetIt.instance;
 
 Future<void> initDependencies() async {
-  _initAuthDependencies();
   _initBlogDependencies();
+  _initAuthDependencies();
 
   final supabase = await Supabase.initialize(
     url: AppKeys.supabaseUrl,
     anonKey: AppKeys.supabaseAnonKey,
   );
+
+  Hive.defaultDirectory = (await getApplicationDocumentsDirectory()).path;
+
   serviceLocator.registerLazySingleton(() => supabase.client);
+
+  serviceLocator.registerLazySingleton(() => Hive.box(name: "blogs"));
 
   //common
   serviceLocator.registerLazySingleton(() => AuthSessionCubit());
+  serviceLocator.registerFactory<ConnectionChecker>(
+    () => ConnectionCheckerImpl(
+      internetConnection: InternetConnection(),
+    ),
+  );
 }
 
 void _initAuthDependencies() {
@@ -42,6 +57,7 @@ void _initAuthDependencies() {
     ..registerFactory<AuthRepository>(
       () => AuthRepositoryImpl(
         remoteDataSource: serviceLocator(),
+        connectionChecker: serviceLocator(),
       ),
     )
     ..registerFactory(
@@ -76,8 +92,17 @@ void _initBlogDependencies() {
         supabaseClient: serviceLocator(),
       ),
     )
+    ..registerFactory<BlogLocalDataSource>(
+      () => BlogLocalDataSourceImpl(
+        box: serviceLocator(),
+      ),
+    )
     ..registerFactory<BlogRepository>(
-      () => BlogRepositoryImpl(remoteDataSource: serviceLocator()),
+      () => BlogRepositoryImpl(
+        remoteDataSource: serviceLocator(),
+        localDataSource: serviceLocator(),
+        connectionChecker: serviceLocator(),
+      ),
     )
     ..registerFactory(
       () => UploadBlog(repository: serviceLocator()),

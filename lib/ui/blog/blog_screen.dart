@@ -1,5 +1,6 @@
 import 'package:blogs/domain/auth/entity/empty_args.dart';
 import 'package:blogs/ui/blog/add_new_blog_screen.dart';
+import 'package:blogs/ui/widgets/blog_card.dart';
 import 'package:blogs/ui/widgets/loader.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -51,7 +52,7 @@ class _BlogScreenState extends State<BlogScreen> {
               itemCount: state.blogs.length,
               itemBuilder: (context, index) {
                 final blog = state.blogs[index];
-                return Text(blog.title);
+                return BlogCard(blog: blog);
               },
             );
           }
